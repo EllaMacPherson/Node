@@ -5,30 +5,56 @@
 
 using namespace std;
 
+void add(Student* student);
+
+Node* head = NULL;
+
 int main(){
 
-  Node* current; //idk if i need but maybe to keep track
-
-  //pretend they select ADD
-  float inGPA = 0;
-  char inName[15];
+  char input[10]="ADD";
   
-  cout<<"GPA of student?";
-  cin>>inGPA;
-  cin.ignore();
-  cout<<"Name of student?";
-  cout<<"RUNG"<<endl;
-  cin.get(inName, 14);
-  cin.ignore();
-  //OKAY THIS WORKS, NOW CHECK IF WHEN U PRINT IT OUT IT WORKS, AND ALL FUNCTIONALITY AROUND THAT
- //create node1, with student pointer of
-  Student* s = new Student(inGPA, inName);
-  Node* node1 = new Node(s);
+  if(strcmp(input, "ADD") == 0) {
 
-  cout<<
+    float inGPA = 0;
+    char inName[15];
   
+    cout<<"GPA of student?";
+    cin>>inGPA;
+    cin.ignore();
+    cout<<"Name of student?";
+    cin.get(inName, 14);
+    cin.ignore();
+    //OKAY THIS WORKS, NOW CHECK IF WHEN U PRINT IT OUT IT WORKS, AND ALL FUNCTIONALITY AROUND THAT
+    //create student pointer to assign to this node
+    Student* s = new Student(inGPA, inName);
 
+    add(s);  
+    }
+  //need to define new student UP HERE!! dummy
+  
   
   return 0;
+
+}
+
+void add(Student* student){
+  Node* current = head;
+  
+  if(current == NULL){
+    //go ahead and add
+    cout<<"ADDING"<<endl;
+    head = new Node(student);
+    cout<<added<<endl;
+  }else{
+    //when the current node is NOT the last one on the list
+    while(current->getNext() != NULL){
+      current = current->getNext();
+    }
+    //when the next thing is null, set the 
+    current->setNext(new Node(student));
+    
+    
+  }
+
 
 }

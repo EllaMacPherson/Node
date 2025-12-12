@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//constructor, adds student to node
 Node::Node(Student* inStudent){
   student = inStudent;
 }
@@ -12,13 +13,16 @@ Student* Node::getStudent(){
 }
 
 Node* Node::getNext(){
-
+  return nextNode;
 }
 
-void Node::setNext(Node*){
-
+void Node::setNext(Node* inNext){
+  nextNode = inNext;
 }
 
 Node::~Node(){
-  //delete thingS!
+  //delete student pointer
+  //delete nextNode pointer
+  delete student;
+  delete nextNode;
 }

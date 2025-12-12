@@ -7,12 +7,14 @@
 
 class Node{
 public:
-  Node(Student*); //constructor basically setting student too
+  Node(Student*); //constructor basically setting student too node
   Node* getNext(); //get next node pointer
   Student* getStudent(); //get student pointer FOR STUDENT AT THIS NODE?
   void setNext(Node*); //set the next node pointer
   
   ~Node(); //destructor do last lol
+
+private:
 
   Student* student; //student linked to this node 
   Node* nextNode; //next node linked to THIS node
