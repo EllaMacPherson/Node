@@ -10,10 +10,12 @@ Student::Student(float inGPA, char* inName){
   strcpy(name, inName);
 }
 
+//give name
 char* Student::getName(){
   return name;
 }
 
+//give GPA
 float Student::getGPA(){
   return gpa;
 }

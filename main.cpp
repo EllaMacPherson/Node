@@ -1,16 +1,17 @@
+/* Ella MacPherson 12/19/25
+   Linked List part 1
+*/
+
 #include <iostream>
 #include <cstring>
 #include "Node.h"
 #include "Student.h"
 
-//PRINTING AND ADDING WORKS!!!! test destructor for ONE ITEM and set head to NULL right after manually. also switching head to a NOT global variable
-
 using namespace std;
 
 void add(Node*& head, Student* student);
 void print(Node*& head, Node* next);
-void Delete(Node*& , Node* next, float GPA);
-
+void Delete(Node*& head, Node* next, float GPA);
 
 
 int main(){
@@ -18,13 +19,16 @@ int main(){
   char input[10];
   bool go = true;
 
+  //start empty
   Node* head = NULL;
 
+  //loop forever
   while (go == true){
     input[0] = '\0';
-    cout<<"ADD?"<<endl;
+    cout<<"ADD, DELETE, or PRINT? Delete only functions with 1 person in list"<<endl;
     cin>>input;
     cin.ignore();
+    //add and ask for inputs
     if(strcmp(input, "ADD") == 0) {
 
       float inGPA = 0;
@@ -39,30 +43,29 @@ int main(){
       
       //create student pointer to assign to this node
       Student* s = new Student(inGPA, inName);
+      //assign that pointer
+      add(head, s);
+    }
 
-      add(s);
-      
-    
-    }
+    //print with recursion
     if(strcmp(input, "PRINT") == 0){
-      print(head);
+      print(head,head);
     }
+    //delete -> only works for 1 node in list just testing destructor
     if(strcmp(input, "DELETE") == 0){
       cout<<"Enter GPA to delete"<<endl;
       float inGPA = 0;
       cin>>inGPA;
       
-      Delete(head, inGPA);
+      Delete(head, head, inGPA);
     }
   }
-    //need to define new student UP HERE!! dummy
-  
   
   return 0;
-
 }
 
-void add(Student* student){
+//add func
+void add(Node*& head,Student* student){
   Node* current = head;
   
   if(current == NULL){
@@ -78,44 +81,42 @@ void add(Student* student){
     }
     //when the next thing is null, set the 
     current->setNext(new Node(student));
-    
-    
   }
-
-
 }
-void print(Node* next){
+
+//print func
+void print(Node*& head, Node* next){
   if(next == head){ //on first one print 
     cout<<"List: ";
   }
 
-  if(next != NULL){ //if we ar not at last one in list
+  if(next != NULL){ //if we are not at last one in list
     cout<<next->getStudent()->getName()<<" ";
-    print(next->getNext());
+    print(head,next->getNext()); //call func again but 1 more down list
   }
 
 }
 
-//only works for 1 unique #, currently testing that case.
+//delete func, again only works with 1 node for testing
+void Delete(Node*& head ,Node* next, float GPA){
 
-//ONLY NEED DELETION OF 1 ITEM IN LIST to prove destructors work
-void Delete(Node* next, float GPA){
-  //  Node* current = head;
-  if(next == head){
+  if(next == head){ //first call
     cout<<"Matches found: ";
   }
 
-  if(next == NULL){
+  if(next == NULL){ //when nothing in list
     cout<<"No students currently in list"<<endl;
     return;
   }
 
+  //if finds GPA
   if(next->getStudent()->getGPA() == GPA){
     cout<<next->getStudent()->getName()<<" " <<endl;
     delete next;
-    head == NULL;
+    head = NULL; //for 1 student manually set it like this
     return;
   }
-  Delete(next->getNext(), GPA);
+  //recursively call again with next node
+  Delete(head,next->getNext(), GPA);
 }
-//test delete
+

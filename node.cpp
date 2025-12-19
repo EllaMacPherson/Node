@@ -3,10 +3,9 @@
 
 using namespace std;
 
-//constructor, adds student to node
 Node::Node(Student* inStudent){
   student = inStudent;
-  nextNode = NULL; //when first creating
+  nextNode = NULL;
 }
 
 Student* Node::getStudent(){
@@ -22,6 +21,5 @@ void Node::setNext(Node* inNext){
 }
 
 Node::~Node(){
-  //delete student pointer!
   delete student;
 }

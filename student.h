@@ -6,11 +6,13 @@
 
 using namespace std;
 
+//student class!!
 class Student{
  public:
-  Student(float inGPA, char* inName);
-  char* getName();
-  float getGPA();
+  Student(float inGPA, char* inName); //set GPA and name
+
+  char* getName(); //retrieve name
+  float getGPA(); //retrieve gpa
 
   char* name;
   float gpa;
